@@ -6,7 +6,7 @@
 
 ``` bash
 # clone项目
-git@github.com:luoxufang/vue-element-admin.git
+https://github.com/luoxufang/react-native-shopping-app.git
 
 # 安装依赖（）
 npm install
