@@ -4,53 +4,56 @@
  */
 'use strict';
 
-var React = require('react-native');
-var Styles = require('./style');
+// var React = require('react-native');
+// var Styles = require('./style');
 
-var API = require('../../network/api');
-var Util = require('../../util/util');
-var Global = require('../../util/global');
-var Loading = require('../loading');
-var Web = require('../web');
+// var API = require('../../network/api');
+// var Util = require('../../util/util');
+// var Global = require('../../util/global');
+// var Loading = require('../loading');
+// var Web = require('../web');
 
 //自定义组件
-var Slider = require('./slidebanner');
-var ADViews = require('./adview');
-var BqService = require('./bqservice');
-var HotGoods = require('./hotgoods');
+// var Slider = require('./slidebanner');
+// var ADViews = require('./adview');
+// var BqService = require('./bqservice');
+// var HotGoods = require('./hotgoods');
 
 //下拉刷新
-var {
-  RefresherListView,
-  LoadingBarIndicator
-} = require('react-native-refresher');
-
-var {
+// var {
+//   RefresherListView,
+//   LoadingBarIndicator
+// } = require('react-native-refresher');
+import React, { Component } from 'react';
+import {
   Text,
   View,
   Image,
   ScrollView,
   ListView,
   TouchableHighlight,
-} = React;
+} from 'react-native';
 
-var home = React.createClass({
-  getInitialState: function() {
-    return {
-      store_id: 8805,
-      loaded:false,
-      banners:[],
-      services:[],
-      hotgoods:[],
-      advs:[],
-    };
-  },
+export default class home extends Component{
+  constructor(props) {
+      super(props);
+      this.state = { 
+        store_id: 8805,
+        loaded:false,
+        banners:[],
+        services:[],
+        hotgoods:[],
+        advs:[],
+      };
+      
+  }
+ 
+  //初始调用函数
+  // componentDidMount() {
+  //   this.getStoreMunu();
+  // }
 
-  componentDidMount: function() {
-    this.getStoreMunu();
-  },
-
-  getStoreMunu:function(){
+  getStoreMunu(){
   	var store_id=this.state.store_id;
   	var p9 = "app";
   	var url ="https://api.bqmart.cn/stores/menu.json?store_id=8805&p9=app";
@@ -66,9 +69,9 @@ var home = React.createClass({
         this.getRecommendation();
       })
       .done();
-  },
+  }
 
-  getRecommendation:function(){
+  getRecommendation(){
     var storeid = this.state.store_id;
     var url = "https://api.bqmart.cn/goods/relatedrecommend.json?store_id=8805&type=seckill&page=1&limit=40";
     fetch(url)
@@ -78,9 +81,9 @@ var home = React.createClass({
           hotgoods:responseData.result,
         });
       }).done();
-  },
+  }
 
-  renderContent: function() {
+  renderContent() {
     if(!this.state.loaded){
       return (<Text style={Styles.hottitle}> LOADING </Text>);
     }
@@ -102,14 +105,13 @@ var home = React.createClass({
               hotgoods ={this.state.hotgoods}/>
   		</ScrollView>
   	);
-  },
+  }
 
-  render: function() {
-  	 if(!this.state.loaded){
-        return <Loading loadingtext='正在加载首页...'/>
-      }
-  	return this.renderContent();
-  },
-});
-
-module.exports = home;
+  render() {
+  	//  if(!this.state.loaded){
+    //     return <Loading loadingtext='正在加载首页...'/>
+    //   }
+    // return this.renderContent();
+    return <Text>我是首页！</Text>
+  }
+}
