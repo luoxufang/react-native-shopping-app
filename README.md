@@ -18,3 +18,6 @@ react-native run-ios
 # build for production and view the bundle analyzer report
 npm run build --report
 ```
+
+![image](http://p3scq6rcn.bkt.clouddn.com/RN-index-page.jpeg) 
+![image](http://p3scq6rcn.bkt.clouddn.com/RN-me-page.jpeg) 
