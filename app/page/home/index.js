@@ -19,11 +19,10 @@
 // var BqService = require('./bqservice');
 // var HotGoods = require('./hotgoods');
 
+import Loading from '../loading';
 //下拉刷新
-// var {
-//   RefresherListView,
-//   LoadingBarIndicator
-// } = require('react-native-refresher');
+// import {RefresherListView,LoadingBarIndicator}  from 'react-native-refresher';
+
 import React, { Component } from 'react';
 import {
   Text,
@@ -108,9 +107,9 @@ export default class home extends Component{
   }
 
   render() {
-  	//  if(!this.state.loaded){
-    //     return <Loading loadingtext='正在加载首页...'/>
-    //   }
+  	  // if(!this.state.loaded){
+      //   return <Loading loadingtext='正在加载首页...'/>
+      // }
     // return this.renderContent();
     return <Text>我是首页！</Text>
   }

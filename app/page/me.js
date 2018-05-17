@@ -5,79 +5,84 @@
  * @version $Id$
  */
 'use strict';
-var React = require('react-native');
-var AddresManager = require('./address/addresslist');
-var OrderManager = require('./order/orderlist');
-var CouponManager = require('./coupon/couponlist');
-var ShellManager = require('./shell/shell');
-var store = require('react-native-simple-store');
+// var React = require('react-native');
+// var AddresManager = require('./address/addresslist');
+// var OrderManager = require('./order/orderlist');
+// var CouponManager = require('./coupon/couponlist');
+// var ShellManager = require('./shell/shell');
+// import store from 'react-native-simple-store';
 
+import React, { Component } from 'react';
+import {
+  StyleSheet,
+  View,
+  Text,
+  ScrollView,
+  Image,
+  ImageBackground,
+  LinkingIOS,
+  TouchableHighlight,
+  ActionSheetIOS,
+  NavigatorIOS,
+} from 'react-native';
 
-var {
-  	StyleSheet,
-  	View,
-  	Text,
-    ScrollView,
-    Image,
-    LinkingIOS,
-    TouchableHighlight,
-    ActionSheetIOS,
-    NavigatorIOS,
-} = React;
-
-var MenuItem = React.createClass({
-  _performClick:function(){
+class MenuItem extends Component{
+  _performClick(){
     var onClick = this.props.onClick;
     if(onClick){
       onClick();
     }
-  },
+  }
 
-  render: function() {
+  render() {
     var margin2Top =parseInt(this.props.margin2Top);
     return (
       <TouchableHighlight underlayColor="#dad9d7" onPress={this._performClick}>
         <View style={{flexDirection:'row',alignItems:'center',backgroundColor:'#ffffff',height:45,marginTop:margin2Top,paddingLeft:20,paddingRight:20}}>
           <Image style={[styles.iconSize]}
-            source={require(this.props.icon)} />
+            source={require('../../image/icon_bottomtag_me_n.png')} />
           <Text  style={{flex:1,color:'#333333',marginLeft:10}}>{this.props.title}</Text>
           <Image style={[styles.iconSize]}
-            source={require("image!arrow_right_grey")} />
+            source={require("../../image/arrow_right_grey.png")} />
         </View>
       </TouchableHighlight>
     );
-  },
-});
-var Me = React.createClass({
-  getInitialState: function() {
-    return {
+  }
+};
+
+export default class me extends Component{
+  
+  constructor(props) {
+    super(props);
+    this.state = { 
       user:null,
     };
-  },
+  }
 
-  componentDidMount: function() {
-    store.get('user').then((userdata)=>{
-      this.setState({
-        user:userdata,
-    })});
-  },
+  componentDidMount() {
+    // store.get('user').then((userdata)=>{
+    //     this.setState({
+    //       user:userdata,
+    //     })
+    // });
+  }
 
-  _addNavigator: function(component, title){
+  _addNavigator(component, title){
     var data = null;
     this.props.navigator.push({
         title: title,
         component: component,
         passProps:{
           data: data
-        }
+        },
       });
-  },
+  }
 
-  _call:function(){
-    LinkingIOS.openURL('tel://4007008780');
-  },
+  _call(){
+    LinkingIOS.openURL('tel://9999999999');
+  }
 
-  render: function() {
+  render() {
     var thiz = this;
     var name="";
     if(this.state.user){
@@ -86,36 +91,36 @@ var Me = React.createClass({
     return (
       <ScrollView style={{backgroundColor:'#eef0f3'}}>
         <View style={[]}>
-          <Image style={[styles.header,styles.center,{backgroundColor:'#6bb967'}] } >
+          <ImageBackground style={[styles.header,styles.center,{backgroundColor:'#6bb967'}] } >
             <View style={styles.transparent}>
                 <Image style={[styles.logoSize]}
-                       source={require("image!ic_logo_circle")} />
+                       source={require("../../image/ic_logo_circle.png")} />
               <Text style={styles.userName}>{name}</Text>
             </View>
-          </Image>
+          </ImageBackground>
          </View>
 
         <MenuItem 
           title='地址管理'
-          icon="image!icon_bottomtag_me_n"
+          icon="../../image/icon_bottomtag_me_n.png"
           onClick={function(){thiz._addNavigator(AddresManager,"地址管理")}}/>
         
         <MenuItem
           title='我的订单'
           margin2Top='1'
-          icon="image!icon_bottomtag_me_n"
+          icon="../../image/icon_bottomtag_me_n.png"
           onClick={function(){thiz._addNavigator(OrderManager,"订单列表")}}/>
 
         <MenuItem
           title='我的红包'
           margin2Top='1'
-          icon="image!icon_bottomtag_me_n"
+          icon="../../image/icon_bottomtag_me_n.png"
           onClick={function(){thiz._addNavigator(CouponManager,"红包")}}/>
 
         <MenuItem
           title='我的贝壳'
           margin2Top='1'
-          icon="image!icon_bottomtag_me_n"
+          icon="../../image/icon_bottomtag_me_n.png"
           onClick={function(){thiz._addNavigator(ShellManager,"我的贝壳")}}/>
 
         <TouchableHighlight 
@@ -126,8 +131,8 @@ var Me = React.createClass({
 
       </ScrollView>
     );
-  },
-});
+  }
+};
 
 var styles = StyleSheet.create({
   container: {
@@ -158,5 +163,3 @@ var styles = StyleSheet.create({
         resizeMode: Image.resizeMode.contain,
   },
 });
-
-module.exports = Me;
