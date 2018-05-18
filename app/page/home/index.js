@@ -24,6 +24,7 @@ import Loading from '../loading';
 // import {RefresherListView,LoadingBarIndicator}  from 'react-native-refresher';
 
 import React, { Component } from 'react';
+// import ViewPager from 'react-native-viewpager';
 import {
   Text,
   View,
@@ -31,11 +32,22 @@ import {
   ScrollView,
   ListView,
   TouchableHighlight,
+  StyleSheet
 } from 'react-native';
+
+const BANNER_IMGS = [  
+  require('../../../image/banner/1.jpg'),  
+  require('../../../image/banner/2.jpg'),  
+  require('../../../image/banner/3.jpg'),  
+  require('../../../image/banner/4.jpg')  
+]; 
 
 export default class home extends Component{
   constructor(props) {
       super(props);
+      // var dataSource = new ViewPager.DataSource({  
+      //     pageHasChanged: (p1, p2) => p1 !== p2,  
+      // }); 
       this.state = { 
         store_id: 8805,
         loaded:false,
@@ -43,6 +55,7 @@ export default class home extends Component{
         services:[],
         hotgoods:[],
         advs:[],
+        // dataSource: dataSource.cloneWithPages(BANNER_IMGS)
       };
       
   }
@@ -106,11 +119,38 @@ export default class home extends Component{
   	);
   }
 
+  _renderPage(data, pageID) {
+          return (
+             <Image
+                   source={data}
+                   style={styles.page}/>
+           );
+       }
+
   render() {
   	  // if(!this.state.loaded){
       //   return <Loading loadingtext='正在加载首页...'/>
       // }
     // return this.renderContent();
-    return <Text>我是首页！</Text>
+    return (
+            <View>
+                {/* <ViewPager
+                  style={{height:130}}
+                  dataSource={this.state.dataSource}
+                  renderPage={this._renderPage}
+                  isLoop={true}
+                  autoPlay={true}/> */}
+
+                    <Text>我是首页！</Text>
+            </View>
+          )
+
   }
 }
+const styles = StyleSheet.create({
+  page:{
+    flex : 1,
+    height: 130,
+    resizeMode:'stretch'
+  }
+})
